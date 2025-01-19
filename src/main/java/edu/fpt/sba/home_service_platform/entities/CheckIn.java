@@ -1,8 +1,11 @@
 package edu.fpt.sba.home_service_platform.entities;
 
+import edu.fpt.sba.home_service_platform.enums.CheckInStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -10,14 +13,18 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Service {
+public class CheckIn {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String name;
+
+    LocalDateTime createdAt;
     String description;
 
+    CheckInStatus checkInStatus;
+
     @ManyToOne
-    Category category;
+    Offer offer;
+
 }

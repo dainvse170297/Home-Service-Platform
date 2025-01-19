@@ -1,11 +1,10 @@
 package edu.fpt.sba.home_service_platform.entities;
 
-import edu.fpt.sba.home_service_platform.enums.OfferStatus;
+import edu.fpt.sba.home_service_platform.enums.CheckInStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,21 +14,25 @@ import java.util.List;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Offer {
+public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    BigDecimal offerPrice;
-    int offerDuration;
+    String content;
     LocalDateTime createdAt;
-    String note;
-    OfferStatus offerStatus;
-    @ManyToOne
-    BookingPost bookingPost;
+    int rating;
+
     @ManyToOne
     Account account;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "offer")
-    List<CheckIn> checkIn;
+
+    @OneToOne
+    @JoinColumn(name = "booking_post_id", referencedColumnName = "id")
+    BookingPost bookingPost;
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "feedback")
+    List<FeedbackImage> feedbackImage;
 
 
 }
+

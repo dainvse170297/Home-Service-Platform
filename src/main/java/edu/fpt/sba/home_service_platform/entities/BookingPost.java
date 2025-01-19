@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -26,11 +27,19 @@ public class BookingPost {
     LocalDateTime startTime;
     double estimateDuration;
     String location;
-    @Enumerated(EnumType.STRING)
     BookingPostStatus bookingPostStatus;
-    @ManyToOne
-    Account account;
-    @ManyToOne
-    Service service;
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    Account account;
+
+    @ManyToOne
+    Facility facility;
+    @OneToMany(mappedBy = "bookingPost")
+    List<Offer> offers;
+    @OneToOne(mappedBy = "bookingPost")
+    Payment payment;
+
+    @OneToOne(mappedBy = "bookingPost")
+    Feedback feedback;
 }

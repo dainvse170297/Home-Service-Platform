@@ -1,5 +1,6 @@
 package edu.fpt.sba.home_service_platform.entities;
 
+import edu.fpt.sba.home_service_platform.enums.MembershipRegisterStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,8 +21,14 @@ public class MembershipRegister {
     LocalDateTime startDate;
     LocalDateTime endDate;
 
+    MembershipRegisterStatus status;
+
     @OneToOne (cascade = CascadeType.ALL)
     Account account;
     @ManyToOne
     Membership memberships;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "membershipRegister")
+    List<MembershipRegisterPayment> membershipRegisterPayments;
+
 }

@@ -10,11 +10,14 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Role {
+public class Facility {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String roleName;
+    String name;
+    String description;
 
+    @ManyToOne
+    Category category;
 }

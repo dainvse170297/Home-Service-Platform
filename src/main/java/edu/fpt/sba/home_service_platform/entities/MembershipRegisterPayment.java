@@ -1,10 +1,12 @@
 package edu.fpt.sba.home_service_platform.entities;
 
+import edu.fpt.sba.home_service_platform.enums.MemberShipPaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -12,14 +14,14 @@ import java.util.List;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Membership {
+public class MembershipRegisterPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String name;
-    int duration;
-    BigDecimal price;
-    String description;
-    @OneToMany(mappedBy = "memberships")
-    List<MembershipRegister> membershipRegister;
+    LocalDateTime createdAt;
+    BigDecimal amount;
+
+    MemberShipPaymentStatus memberShipPaymentStatus;
+    @ManyToOne
+    MembershipRegister membershipRegister;
 }

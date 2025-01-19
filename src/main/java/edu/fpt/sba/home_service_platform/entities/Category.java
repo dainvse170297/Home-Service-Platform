@@ -21,5 +21,5 @@ public class Category {
     String description;
 
     @OneToMany(mappedBy = "category")
-    List<Service> services;
+    List<Facility> facilityList;
 }

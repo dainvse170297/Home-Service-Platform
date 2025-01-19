@@ -4,17 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Role {
+public class FeedbackImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String roleName;
+    String url;
+    @ManyToOne
+    Feedback feedback;
 
 }

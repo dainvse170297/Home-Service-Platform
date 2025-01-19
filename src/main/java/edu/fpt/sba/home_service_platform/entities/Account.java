@@ -20,7 +20,7 @@ public class Account {
     @Column(unique = true, nullable = false)
     String username;
     String password;
-
+    boolean isActive;
     @OneToOne(cascade = CascadeType.ALL)
     AccountProfile accountProfile;
 
@@ -29,7 +29,11 @@ public class Account {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
     List<Notifications> notifications;
-    @OneToOne
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
+    List<Feedback> feedbacks;
+
+    @ManyToOne
     Role role;
 
 }
