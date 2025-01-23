@@ -17,9 +17,9 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+                .orElseThrow(() -> new RuntimeException("Invalid Username or Password"));
         if (!account.isActive()){
-            throw new RuntimeException("User is not active");
+            throw new RuntimeException("Account is not active");
         }
         return UserDetailsImpl.build(account);
     }

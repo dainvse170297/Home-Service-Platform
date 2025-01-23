@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.UUID;
 
@@ -67,5 +68,24 @@ public class JwtUtils {
 
     public String generateJwtToken(UserDetailsImpl userPrincipal){
         return generateTokenFromUsername(userPrincipal.getUsername());
+    }
+
+    public String generateVerificationToken(String username){
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuer("homelet")
+                .signWith(key(), SignatureAlgorithm.HS256)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().toInstant().plus(1, ChronoUnit.DAYS).toEpochMilli()))
+                .setId(String.valueOf(UUID.randomUUID()))
+                .compact();
+    }
+
+    public Date getExpDateFromToken(String token){
+        return Jwts.parserBuilder()
+                .setSigningKey(key())
+                .build()
+                .parseClaimsJws(token)
+                .getBody().getExpiration();
     }
 }
