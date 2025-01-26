@@ -32,7 +32,7 @@ public class SecurityConfig {
     private final AuthEntryPointJwt unauthorizedHandler;
 
     private static final List<String> SECURED_URLS =
-            List.of();
+            List.of("/account/p");
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {

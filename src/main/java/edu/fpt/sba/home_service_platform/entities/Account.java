@@ -29,12 +29,15 @@ public class Account {
     @OneToOne(cascade = CascadeType.ALL)
     AccountProfile accountProfile;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
     List<BookingPost> bookingPosts;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
     List<Notifications> notifications;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "account")
     List<Feedback> feedbacks;
 

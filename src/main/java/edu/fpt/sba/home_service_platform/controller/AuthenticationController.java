@@ -1,6 +1,7 @@
 package edu.fpt.sba.home_service_platform.controller;
 
 import edu.fpt.sba.home_service_platform.dto.request.AuthenticationRequest;
+import edu.fpt.sba.home_service_platform.dto.request.RefreshTokenRequest;
 import edu.fpt.sba.home_service_platform.dto.response.AuthenticationResponse;
 import edu.fpt.sba.home_service_platform.services.Impl.AuthenticationService;
 import jakarta.validation.Valid;
@@ -22,4 +23,10 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.login(request));
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthenticationResponse> refresh(@Valid @RequestBody RefreshTokenRequest request){
+        return ResponseEntity.ok(authenticationService.refreshToken(request));
+    }
+
 }

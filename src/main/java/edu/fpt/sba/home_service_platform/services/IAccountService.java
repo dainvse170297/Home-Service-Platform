@@ -10,4 +10,6 @@ public interface IAccountService {
     AccountDTO registerUserAccount(AccountCreateRequest accountCreateRequest) throws MessagingException;
 
     AccountDTO verifyAccount(String token);
+
+    Account getAuthenticatedAccount();
 }

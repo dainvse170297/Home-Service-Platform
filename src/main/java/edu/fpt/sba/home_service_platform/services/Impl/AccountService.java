@@ -16,6 +16,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -94,5 +95,14 @@ public class AccountService implements IAccountService {
         }else{
             throw new RuntimeException("Token expired");
         }
+    }
+
+    @Override
+    public Account getAuthenticatedAccount() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName(); //get username from jwt token
+
+        return accountRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
     }
 }

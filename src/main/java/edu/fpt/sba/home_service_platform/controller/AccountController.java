@@ -28,4 +28,9 @@ public class AccountController {
     public ResponseEntity<AccountDTO> verifyAccount(@NonNull @RequestBody VerifyAccountRequest request) {
         return ResponseEntity.ok(accountService.verifyAccount(request.getToken()));
     }
+
+    @GetMapping("/p")
+    public ResponseEntity<Account> getAuthenticatedAccount() {
+        return ResponseEntity.ok(accountService.getAuthenticatedAccount());
+    }
 }
